@@ -15,12 +15,14 @@ URxvt*scrollTtyKeypress: true
 URxvt*geometry:      100x70
 URxvt*highlightSelection: true
 URxvt*transparent: true
-URxvt*shading: 3
+URxvt*shading: 10
 !URxvt*tintColor: #000000
 !URxvt*blurRadius: 5
 
 URxvt.scrollstyle:      plain
 URxvt.secondaryScroll:  true
+URxvt*saveLines: 4096
+URxvt*scrollBar_right: true
 
 ! fixed
 *font: 7x14
@@ -110,12 +112,12 @@ URxvt*colorUL:		#007fff
 ! end colors ----------------------------------------------------------------
 
 !URxvt.underlineColor:   white
-URxvt*scrollColor:   #212121
+URxvt*scrollColor:   #777777
 URxvt.pastableTabs:     false
-URxvt.tabbed.tabbar-fg: 7
+URxvt.tabbed.tabbar-fg: 10
 URxvt.tabbed.tabbar-bg: 0
-URxvt.tabbed.tab-fg:    15
-URxvt.tabbed.tab-bg:    12
+URxvt.tabbed.tab-fg:    14
+URxvt.tabbed.tab-bg:    4 
 
 ! xterm
 xterm*geometry:      80x25
