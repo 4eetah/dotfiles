@@ -1,4 +1,4 @@
-URxvt.perl-ext-common:  default,tabbed,matcher,searchable-scrollback
+URxvt.perl-ext-common:  default,tabbed,matcher,searchable-scrollback,selection-to-clipboard
 URxvt*cutchars:         "()*,<>[]{}|'"
 URxvt*termName:         rxvt-unicode
 URxvt*urlLauncher:      iceweasel
@@ -14,7 +14,7 @@ URxvt*scrollTtyKeypress: true
 
 URxvt*geometry:      100x70
 URxvt*highlightSelection: true
-URxvt*transparent: true
+URxvt*transparent: false
 URxvt*shading: 10
 !URxvt*tintColor: #000000
 !URxvt*blurRadius: 5
@@ -23,6 +23,11 @@ URxvt.scrollstyle:      plain
 URxvt.secondaryScroll:  true
 URxvt*saveLines: 4096
 URxvt*scrollBar_right: true
+
+URxvt.keysym.Shift-Control-V: eval:paste_clipboard
+URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
+
+URxvt.url-launcher: /usr/bin/xdg-open
 
 ! fixed
 *font: 7x14
