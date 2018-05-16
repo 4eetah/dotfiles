@@ -1,44 +1,23 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Maintainer: 
-"       Amir Salihefendic
-"       http://amix.dk - amix@amix.dk
-"
-" Version: 
-"       5.0 - 29/05/12 15:43:36
-"
-" Blog_post: 
-"       http://amix.dk/blog/post/19691#The-ultimate-Vim-configuration-on-Github
-"
-" Awesome_version:
-"       Get this config, nice color schemes and lots of plugins!
-"
-"       Install the awesome version from:
-"
-"           https://github.com/amix/vimrc
-"
-" Syntax_highlighted:
-"       http://amix.dk/vim/vimrc.html
-"
-" Raw_version: 
-"       http://amix.dk/vim/vimrc.txt
-"
-" Sections:
-"    -> General
-"    -> VIM user interface
-"    -> Colors and Fonts
-"    -> Files and backups
-"    -> Text, tab and indent related
-"    -> Visual mode related
-"    -> Moving around, tabs and buffers
-"    -> Status line
-"    -> Editing mappings
-"    -> vimgrep searching and cope displaying
-"    -> Spell checking
-"    -> Misc
-"    -> Helper functions
-"
+" => Vundle
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set nocompatible
+filetype off
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
 
+Plugin 'gmarik/vundle'
+Plugin 'lyuts/vim-rtags'
+Plugin 'itchyny/lightline.vim'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'scrooloose/nerdtree'
+Plugin 'tpope/vim-surround'
+Plugin 'junegunn/fzf.vim'
+Plugin 'junegunn/fzf'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'christoomey/vim-system-copy'
+
+filetype plugin indent on
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
@@ -404,8 +383,11 @@ endfunction
 " Here I will put my humble stuff
 " *******************************
 set number
+" ctrl+u to uppercase current word - useful for C constants
+inoremap <c-u> <esc>viwU<esc>ei
 " Fast quit
 nmap <leader>q :q<cr>
+nmap <leader>q1 :q!<cr>
 nmap <leader>aq :qa<cr>
 " Explorer
 nmap <leader>e :Explore<cr>
@@ -434,12 +416,12 @@ nnoremap <silent><leader>b :TagbarToggle<cr>
 
 """"" Visualise indentation
 "Display indentation dots if we use tabs
-"set list lcs=tab:\¦\ 
-"hi SpecialKey guifg=grey30 ctermfg=grey
+set list lcs=tab:\¦\ 
+hi SpecialKey guifg=grey30 ctermfg=grey
 
 "Use indentLine plugin if we use spaces
-"let g:indentLine_char = '.'
-"let g:indentLine_color_term = 239
+let g:indentLine_char = '.'
+let g:indentLine_color_term = 239
 """""
 
 "Highlight trailing withespaces /\S\zs\s\+$/
@@ -486,3 +468,14 @@ function MyTabLabel(n)
   return '[' . buflist[winnr - 1] . ']' . bufname(buflist[winnr - 1])
 endfunction
 
+noremap <leader>m :NERDTreeCWD<cr>
+" Start nerdtree if no files where specified
+" autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+"""
+
+" Fuzzy Finder
+noremap <leader>f :Files<cr>
+
+" YouCompleteMe popup menu's colors
+highlight Pmenu guifg=#ffffff guibg=#008700
