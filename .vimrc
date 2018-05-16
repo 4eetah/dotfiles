@@ -3,10 +3,10 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible
 filetype off
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-Plugin 'gmarik/vundle'
+Plugin 'VundleVim/Vundle.vim'
 Plugin 'lyuts/vim-rtags'
 Plugin 'itchyny/lightline.vim'
 Plugin 'terryma/vim-multiple-cursors'
@@ -16,7 +16,9 @@ Plugin 'junegunn/fzf.vim'
 Plugin 'junegunn/fzf'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'christoomey/vim-system-copy'
+Plugin 'Yggdroot/indentLine'
 
+call vundle#end()
 filetype plugin indent on
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -174,10 +176,6 @@ vnoremap <silent> # :call VisualSelection('b')<CR>
 " Treat long lines as break lines (useful when moving around in them)
 map j gj
 map k gk
-
-" Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
-map <space> /
-map <C-space> ?
 
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
@@ -380,8 +378,7 @@ function! <SID>BufcloseCloseIt()
    endif
 endfunction
 
-" Here I will put my humble stuff
-" *******************************
+" *******************************************************************************************************
 set number
 " ctrl+u to uppercase current word - useful for C constants
 inoremap <c-u> <esc>viwU<esc>ei
@@ -389,9 +386,6 @@ inoremap <c-u> <esc>viwU<esc>ei
 nmap <leader>q :q<cr>
 nmap <leader>q1 :q!<cr>
 nmap <leader>aq :qa<cr>
-" Explorer
-nmap <leader>e :Explore<cr>
-nmap <leader>te :tabe<cr>
 
 " From CamelCase to lower_case
 nmap <leader>ctl :s/\<\u\\|\l\u/\=len(submatch(0)) == 1 ? tolower(submatch(0)) : submatch(0)[0].'_'.tolower(submatch(0)[1])/g<cr>
@@ -409,29 +403,10 @@ nmap <F3> :source ~/.vim/vim_session<cr>
 
 "nmap nse syntax terminal
 au BufRead,BufNewFile *.nse set filetype=nse
-au! Syntax nse source /usr/share/vim/vim74/syntax/lua.vim
+au! Syntax nse source /usr/share/vim/*/syntax/lua.vim
 
 "Pop up Tagbar
 nnoremap <silent><leader>b :TagbarToggle<cr>
-
-""""" Visualise indentation
-"Display indentation dots if we use tabs
-set list lcs=tab:\¦\ 
-hi SpecialKey guifg=grey30 ctermfg=grey
-
-"Use indentLine plugin if we use spaces
-let g:indentLine_char = '.'
-let g:indentLine_color_term = 239
-"""""
-
-"Highlight trailing withespaces /\S\zs\s\+$/
-" highlight ExtraWhitespace ctermbg=yellow guibg=LightGreen
-" match ExtraWhitespace /\s\+$/
-" autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-" autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-" autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-" autocmd BufWinLeave * call clearmatches()
-
 
 """ Show Tabs numbers
 set tabline=%!MyTabLine()
@@ -468,14 +443,37 @@ function MyTabLabel(n)
   return '[' . buflist[winnr - 1] . ']' . bufname(buflist[winnr - 1])
 endfunction
 
-noremap <leader>m :NERDTreeCWD<cr>
-" Start nerdtree if no files where specified
-" autocmd StdinReadPre * let s:std_in=1
-" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-"""
+" ****** Files explorer ******
+" use NERD Tree
+noremap <leader>e :NERDTreeCWD<cr>
+" use default netrw
+" nmap <leader>e :Explore<cr>
 
 " Fuzzy Finder
 noremap <leader>f :Files<cr>
 
 " YouCompleteMe popup menu's colors
 highlight Pmenu guifg=#ffffff guibg=#008700
+let g:ycm_show_diagnostics_ui = 0
+
+" vim-rtags 
+let g:rtagsUseDefaultMappings = 0
+noremap <C-\>g :call rtags#JumpTo(g:SAME_WINDOW)<CR>
+noremap <C-\>d :call rtags#JumpTo(g:SAME_WINDOW, { '--declaration-only' : '' })<CR>
+noremap <C-@>g :call rtags#JumpTo(g:NEW_TAB)<CR>
+noremap <C-\>s :call rtags#FindRefs()<CR>
+noremap <C-t> :call rtags#JumpBack()<CR>
+
+" vim-system-copy
+let g:system_copy#copy_command='xclip -selection clipboard -in'
+let g:system_copy#paste_command='xclip -selection clipboard -out'
+
+" IndentLine
+" Use indentLine plugin if we use spaces
+let g:indentLine_char = '.'
+let g:indentLine_color_term = 239
+"Display indentation dots if we use tabs ¦
+set list lcs=tab:\,\ 
+hi SpecialKey guifg=grey30 ctermfg=grey
+
+
