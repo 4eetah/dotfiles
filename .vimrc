@@ -458,6 +458,8 @@ let g:ycm_show_diagnostics_ui = 0
 
 " vim-rtags 
 let g:rtagsUseDefaultMappings = 0
+let g:rtagsRcCmd = "rtags"
+let g:rtagsAutoLaunchRdm = 1
 noremap <C-\>g :call rtags#JumpTo(g:SAME_WINDOW)<CR>
 noremap <C-\>d :call rtags#JumpTo(g:SAME_WINDOW, { '--declaration-only' : '' })<CR>
 noremap <C-@>g :call rtags#JumpTo(g:NEW_TAB)<CR>
