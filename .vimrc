@@ -17,9 +17,12 @@ Plugin 'junegunn/fzf'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'christoomey/vim-system-copy'
 Plugin 'Yggdroot/indentLine'
+Plugin 'chrisbra/csv.vim'
 
 call vundle#end()
 filetype plugin indent on
+
+runtime ftplugin/man.vim
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
@@ -121,6 +124,9 @@ if has("gui_running")
     set guioptions+=e
     set t_Co=256
     set guitablabel=%M\ %t
+	set guifont=Gohu\ GohuFont\ 10
+	highlight Cursor guifg=white guibg=green
+	autocmd GUIEnter * set vb t_vb=
 endif
 
 " Set utf8 as standard encoding and en_US as the standard language
@@ -267,10 +273,10 @@ autocmd BufWrite *.coffee :call DeleteTrailingWS()
 vnoremap <silent> gv :call VisualSelection('gv')<CR>
 
 " Open vimgrep and put the cursor in the right position
-map <leader>g :vimgrep // **/*.<left><left><left><left><left><left><left>
+map <leader>g :vimgrep // **/*<left><left><left><left><left><left>
 
 " Vimgreps in the current file
-map <leader><space> :vimgrep // <C-R>%<C-A><right><right><right><right><right><right><right><right><right>
+map <leader><space> :vimgrep // <C-R>%<home><C-right><C-right><left>
 
 " When you press <leader>r you can search and replace the selected text
 vnoremap <silent> <leader>r :call VisualSelection('replace')<CR>
@@ -289,7 +295,7 @@ vnoremap <silent> <leader>r :call VisualSelection('replace')<CR>
 map <leader>cc :botright cope<cr>
 map <leader>co ggVGy:tabnew<cr>:set syntax=qf<cr>pgg
 map <leader>n :cn<cr>
-" map <leader>p :cp<cr>
+map <leader>p :cp<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -315,7 +321,7 @@ noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 " map <leader>q :e ~/buffer<cr>
 
 " Toggle paste mode on and off
-map <leader>p :setlocal paste!<cr>
+map <leader>pp :setlocal paste!<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -403,10 +409,11 @@ nmap <F3> :source ~/.vim/vim_session<cr>
 
 "nmap nse syntax terminal
 au BufRead,BufNewFile *.nse set filetype=nse
-au! Syntax nse source /usr/share/vim/*/syntax/lua.vim
+au! Syntax nse source /usr/share/vim/vim74/syntax/lua.vim
 
 "Pop up Tagbar
 nnoremap <silent><leader>b :TagbarToggle<cr>
+nnoremap <MiddleMouse> :tabclose<cr>
 
 """ Show Tabs numbers
 set tabline=%!MyTabLine()
@@ -446,6 +453,7 @@ endfunction
 " ****** Files explorer ******
 " use NERD Tree
 noremap <leader>e :NERDTreeCWD<cr>
+let NERDTreeShowHidden=1
 " use default netrw
 " nmap <leader>e :Explore<cr>
 
@@ -461,10 +469,12 @@ let g:rtagsUseDefaultMappings = 0
 let g:rtagsRcCmd = "rtags"
 let g:rtagsAutoLaunchRdm = 1
 noremap <C-\>g :call rtags#JumpTo(g:SAME_WINDOW)<CR>
+noremap <C-LeftMouse> :call rtags#JumpTo(g:SAME_WINDOW)<CR>
 noremap <C-\>d :call rtags#JumpTo(g:SAME_WINDOW, { '--declaration-only' : '' })<CR>
 noremap <C-@>g :call rtags#JumpTo(g:NEW_TAB)<CR>
 noremap <C-\>s :call rtags#FindRefs()<CR>
 noremap <C-t> :call rtags#JumpBack()<CR>
+noremap <C-RightMouse> :call rtags#JumpBack()<CR>
 
 " vim-system-copy
 let g:system_copy#copy_command='xclip -selection clipboard -in'
