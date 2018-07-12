@@ -488,4 +488,14 @@ let g:indentLine_color_term = 239
 set list lcs=tab:\,\ 
 hi SpecialKey guifg=grey30 ctermfg=grey
 
+" Location list (quickfix) - open in a new tab
+" set switchbuf+=usetab,newtab
 
+" Man pages
+function ManRead(section)
+	let wordUnderCursor = expand("<cword>")
+	execute ":Man " . a:section . " " . wordUnderCursor
+	execute ":20winc +"
+endfunction
+"let g:ft_man_open_mode = 'vert'
+noremap 3<LeftMouse> :call ManRead(3)<cr>
