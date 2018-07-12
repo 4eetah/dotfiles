@@ -497,5 +497,16 @@ function ManRead(section)
 	execute ":Man " . a:section . " " . wordUnderCursor
 	execute ":20winc +"
 endfunction
-"let g:ft_man_open_mode = 'vert'
+" General Linux / bash pages
+noremap 1<LeftMouse> :call ManRead(1)<cr>
+noremap 1<RightMouse> :q<cr>
+" Linux C stdlib pages
 noremap 3<LeftMouse> :call ManRead(3)<cr>
+noremap 3<RightMouse> :q<cr>
+" Misc pages
+noremap 7<LeftMouse> :call ManRead(7)<cr>
+noremap 7<RightMouse> :q<cr>
+
+" ***** Move between tabs with mouse  ***
+noremap <S-LeftMouse> :tabp<cr>
+noremap <S-RightMouse> :tabn<cr>
