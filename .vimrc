@@ -391,6 +391,7 @@ set number
 inoremap <c-u> <esc>viwU<esc>ei
 " Fast quit
 nmap <leader>q :q<cr>
+nmap <C-MiddleMouse> :q<cr>
 nmap <leader>q1 :q!<cr>
 nmap <leader>aq :qa<cr>
 
@@ -414,7 +415,6 @@ au! Syntax nse source /usr/share/vim/vim74/syntax/lua.vim
 
 "Pop up Tagbar
 nnoremap <silent><leader>b :TagbarToggle<cr>
-nnoremap <MiddleMouse> :tabclose<cr>
 
 """ Show Tabs numbers
 set tabline=%!MyTabLine()
@@ -477,7 +477,7 @@ noremap <C-LeftMouse> :call rtags#JumpTo(g:SAME_WINDOW)<CR>
 noremap <C-\>d :call rtags#JumpTo(g:SAME_WINDOW, { '--declaration-only' : '' })<CR>
 noremap <C-@>g :call rtags#JumpTo(g:NEW_TAB)<CR>
 noremap <C-\>s :call rtags#FindRefs()<CR>
-noremap <C-t> :call rtags#JumpBack()<CR>
+noremap <C-r> :call rtags#JumpBack()<CR>
 noremap <C-RightMouse> :call rtags#JumpBack()<CR>
 
 " vim-system-copy
