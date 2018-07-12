@@ -18,6 +18,7 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'christoomey/vim-system-copy'
 Plugin 'Yggdroot/indentLine'
 Plugin 'chrisbra/csv.vim'
+Plugin 'jistr/vim-nerdtree-tabs'
 
 call vundle#end()
 filetype plugin indent on
@@ -452,8 +453,11 @@ endfunction
 
 " ****** Files explorer ******
 " use NERD Tree
-noremap <leader>e :NERDTreeCWD<cr>
+"noremap <leader>e :NERDTreeCWD<cr>
+noremap <leader>e :NERDTreeTabsToggle<cr>
 let NERDTreeShowHidden=1
+" open nerdtree on newtab
+"autocmd BufWinEnter * NERDTreeMirror
 " use default netrw
 " nmap <leader>e :Explore<cr>
 
@@ -510,3 +514,4 @@ noremap 7<RightMouse> :q<cr>
 " ***** Move between tabs with mouse  ***
 noremap <S-LeftMouse> :tabp<cr>
 noremap <S-RightMouse> :tabn<cr>
+
