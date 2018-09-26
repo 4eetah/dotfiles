@@ -17,7 +17,7 @@ Plugin 'junegunn/fzf'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'christoomey/vim-system-copy'
 Plugin 'Yggdroot/indentLine'
-Plugin 'chrisbra/csv.vim'
+"Plugin 'chrisbra/csv.vim'
 Plugin 'jistr/vim-nerdtree-tabs'
 
 call vundle#end()
@@ -103,6 +103,8 @@ set novisualbell
 set t_vb=
 set tm=500
 
+" Max opened tabs when do you `vim -p`
+set tabpagemax=100
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
@@ -391,7 +393,6 @@ set number
 inoremap <c-u> <esc>viwU<esc>ei
 " Fast quit
 nmap <leader>q :q<cr>
-nmap <C-MiddleMouse> :q<cr>
 nmap <leader>q1 :q!<cr>
 nmap <leader>aq :qa<cr>
 
@@ -467,6 +468,10 @@ noremap <leader>f :Files<cr>
 " YouCompleteMe popup menu's colors
 highlight Pmenu guifg=#ffffff guibg=#008700
 let g:ycm_show_diagnostics_ui = 0
+let g:ycm_python_binary_path = 'python'
+" use ycm goto declaration for python
+autocmd FileType python map <buffer> <C-LeftMouse> :YcmCompleter GoToDeclaration<cr>
+autocmd FileType python nnoremap <buffer> <C-RightMouse> <C-O>
 
 " vim-rtags 
 let g:rtagsUseDefaultMappings = 0
@@ -479,6 +484,8 @@ noremap <C-@>g :call rtags#JumpTo(g:NEW_TAB)<CR>
 noremap <C-\>s :call rtags#FindRefs()<CR>
 noremap <C-r> :call rtags#JumpBack()<CR>
 noremap <C-RightMouse> :call rtags#JumpBack()<CR>
+" close LocationList when file gets selected
+" autocmd FileType LocationList nmap <buffer> <cr> <cr>:lcl<cr>
 
 " vim-system-copy
 let g:system_copy#copy_command='xclip -selection clipboard -in'
