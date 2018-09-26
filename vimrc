@@ -19,6 +19,7 @@ Plugin 'christoomey/vim-system-copy'
 Plugin 'Yggdroot/indentLine'
 "Plugin 'chrisbra/csv.vim'
 Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'mhinz/vim-grepper'
 
 call vundle#end()
 filetype plugin indent on
@@ -106,6 +107,9 @@ set tm=500
 " Max opened tabs when do you `vim -p`
 set tabpagemax=100
 
+" Open Location list entry in a new tab
+set switchbuf+=usetab,newtab
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -127,7 +131,7 @@ if has("gui_running")
     set guioptions+=e
     set t_Co=256
     set guitablabel=%M\ %t
-	set guifont=Gohu\ GohuFont\ 10
+	set guifont=xos4\ Terminus\ 11
 	highlight Cursor guifg=white guibg=green
 	autocmd GUIEnter * set vb t_vb=
 endif

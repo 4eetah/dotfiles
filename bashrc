@@ -36,7 +36,8 @@ alias grer="grep -rnI"
 # git
 alias gits="git status"
 alias gita="git add"
-alias gitc="git commit"
+alias gitcm="git commit"
+alias gitco="git checkout"
 alias gitph="git push"
 alias gitpl="git pull"
 alias gitl="git log"
@@ -50,6 +51,7 @@ alias ..="cd .."
 
 # vim
 #alias vi="vi -p"
+alias gvim="gvim -p"
 
 vi() {
 	local flist
