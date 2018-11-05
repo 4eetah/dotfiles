@@ -277,16 +277,16 @@ autocmd BufWrite *.coffee :call DeleteTrailingWS()
 " => vimgrep searching and cope displaying
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " When you press gv you vimgrep after the selected text
-vnoremap <silent> gv :call VisualSelection('gv')<CR>
+" vnoremap <silent> gv :call VisualSelection('gv')<CR>
 
 " Open vimgrep and put the cursor in the right position
-map <leader>g :vimgrep // **/*<left><left><left><left><left><left>
+" map <leader>g :vimgrep // **/*<left><left><left><left><left><left>
 
 " Vimgreps in the current file
-map <leader><space> :vimgrep // <C-R>%<home><C-right><C-right><left>
+" map <leader><space> :vimgrep // <C-R>%<home><C-right><C-right><left>
 
 " When you press <leader>r you can search and replace the selected text
-vnoremap <silent> <leader>r :call VisualSelection('replace')<CR>
+" vnoremap <silent> <leader>r :call VisualSelection('replace')<CR>
 
 " Do :help cope if you are unsure what cope is. It's super useful!
 "
@@ -416,7 +416,7 @@ nmap <F3> :source ~/.vim/vim_session<cr>
 
 "nmap nse syntax terminal
 au BufRead,BufNewFile *.nse set filetype=nse
-au! Syntax nse source /usr/share/vim/vim74/syntax/lua.vim
+au! Syntax nse source /usr/share/vim/vim80/syntax/lua.vim
 
 "Pop up Tagbar
 nnoremap <silent><leader>b :TagbarToggle<cr>
@@ -460,7 +460,7 @@ endfunction
 " use NERD Tree
 "noremap <leader>e :NERDTreeCWD<cr>
 noremap <leader>e :NERDTreeTabsToggle<cr>
-let NERDTreeShowHidden=1
+let NERDTreeShowHidden=0
 " open nerdtree on newtab
 "autocmd BufWinEnter * NERDTreeMirror
 " use default netrw
@@ -506,12 +506,31 @@ hi SpecialKey guifg=grey30 ctermfg=grey
 " Location list (quickfix) - open in a new tab
 " set switchbuf+=usetab,newtab
 
-" Man pages
-function ManRead(section)
+" Man pages reader
+" *****************************************************
+function ManReadSection(section)
 	let wordUnderCursor = expand("<cword>")
 	execute ":Man " . a:section . " " . wordUnderCursor
 	execute ":20winc +"
 endfunction
+
+function ManRead()
+	let wordUnderCursor = expand("<cword>")
+	execute ":Man " . wordUnderCursor
+	execute ":20winc +"
+endfunction
+
+function ManReadCurrentFile()
+	let currentSelected = g:NERDTreeFileNode.GetSelected().path
+	if !currentSelected.isDirectory
+		execute ":Man " . currentSelected.str()
+		execute ":20winc +"
+	endif
+endfunction
+
+noremap m<LeftMouse> :call ManRead()<cr>
+noremap <leader>m :call ManReadCurrentFile()<cr>
+
 " General Linux / bash pages
 noremap 1<LeftMouse> :call ManRead(1)<cr>
 noremap 1<RightMouse> :q<cr>
@@ -521,8 +540,11 @@ noremap 3<RightMouse> :q<cr>
 " Misc pages
 noremap 7<LeftMouse> :call ManRead(7)<cr>
 noremap 7<RightMouse> :q<cr>
+" *****************************************************
 
 " ***** Move between tabs with mouse  ***
 noremap <S-LeftMouse> :tabp<cr>
 noremap <S-RightMouse> :tabn<cr>
 
+" Grepper
+noremap <leader>g :Grepper<cr>

@@ -19,11 +19,11 @@ export EDITOR=vim
 export TERM=xterm-256color
 
 # TivaLaunchPad toolchain
-TIVA_GCC=/home/den4ix/Projects/TivaLaunchPad/gcc-arm-none-eabi-4_7-2013q1/bin
-TIVA_FLASH=/home/den4ix/Projects/TivaLaunchPad/lm4tools/lm4flash
+TIVA_GCC=/home/stickyfingaz/Projects/TivaLaunchPad/gcc-arm-none-eabi-4_7-2013q1/bin
+TIVA_FLASH=/home/stickyfingaz/Projects/TivaLaunchPad/lm4tools/lm4flash
 PATH=$PATH:$TIVA_GCC:$TIVA_FLASH
 # my apps
-PATH=$PATH:/home/den4ix/Apps/bin:/home/den4ix/.luarocks/bin
+PATH=$PATH:/home/stickyfingaz/Apps/bin:/home/stickyfingaz/.luarocks/bin
 # Intel icpc compiler
 PATH=$PATH:/opt/intel/bin
 export PATH
@@ -146,7 +146,7 @@ findc()
 
 # cscope files for the kernel
 ############################
-#LNXPATH=/home/den4ix/ldd3_work/linux-3.2.84
+#LNXPATH=/home/stickyfingaz/ldd3_work/linux-3.2.84
 #    cd /    
 #    find  $LNXPATH                                                                \
 #    -path "$LNXPATH/arch/*" ! -path "$LNXPATH/arch/i386*" -prune -o               \
@@ -155,7 +155,7 @@ findc()
 #    -path "$LNXPATH/Documentation*" -prune -o                                 \
 #    -path "$LNXPATH/scripts*" -prune -o                                       \
 #    -path "$LNXPATH/drivers*" -prune -o                                       \
-#        -name "*.[chxsS]" -print >/home/den4ix/.cscope/cscope.files
+#        -name "*.[chxsS]" -print >/home/stickyfingaz/.cscope/cscope.files
 cscope_kernel()
 {
     if [ $# -ne 1 ]; then
@@ -192,8 +192,8 @@ cscope_kernel()
 #  }
 
 # prepend luarocks paths, nmap NSE paths
-export LUA_PATH='/usr/share/nmap/nselib/?.lua;/usr/share/nmap/scripts/?.lua;/home/den4ix/.luarocks/share/lua/5.3/?.lua;/home/den4ix/.luarocks/share/lua/5.3/?/init.lua;/usr/lib64/lua/luarocks/share/lua/5.3/?.lua;/usr/lib64/lua/luarocks/share/lua/5.3/?/init.lua;/usr/share/lua/5.3/?.lua;/usr/share/lua/5.3/?/init.lua;/usr/lib64/lua/5.3/?.lua;/usr/lib64/lua/5.3/?/init.lua;./?.lua;./?/init.lua'
-export LUA_CPATH='/home/den4ix/.luarocks/lib/lua/5.3/?.so;/usr/lib64/lua/luarocks/lib/lua/5.3/?.so;/usr/lib64/lua/5.3/?.so;/usr/lib64/lua/5.3/loadall.so;./?.so'
+export LUA_PATH='/usr/share/nmap/nselib/?.lua;/usr/share/nmap/scripts/?.lua;/home/stickyfingaz/.luarocks/share/lua/5.3/?.lua;/home/stickyfingaz/.luarocks/share/lua/5.3/?/init.lua;/usr/lib64/lua/luarocks/share/lua/5.3/?.lua;/usr/lib64/lua/luarocks/share/lua/5.3/?/init.lua;/usr/share/lua/5.3/?.lua;/usr/share/lua/5.3/?/init.lua;/usr/lib64/lua/5.3/?.lua;/usr/lib64/lua/5.3/?/init.lua;./?.lua;./?/init.lua'
+export LUA_CPATH='/home/stickyfingaz/.luarocks/lib/lua/5.3/?.so;/usr/lib64/lua/luarocks/lib/lua/5.3/?.so;/usr/lib64/lua/5.3/?.so;/usr/lib64/lua/5.3/loadall.so;./?.so'
 
 # ROS stuff
 #. /opt/ros/kinetic/setup.bash
