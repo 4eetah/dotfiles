@@ -19,8 +19,8 @@ export EDITOR=vim
 export TERM=xterm-256color
 
 # TivaLaunchPad toolchain
-TIVA_GCC=/home/stickyfingaz/Projects/TivaLaunchPad/gcc-arm-none-eabi-4_7-2013q1/bin
-TIVA_FLASH=/home/stickyfingaz/Projects/TivaLaunchPad/lm4tools/lm4flash
+#TIVA_GCC=/home/stickyfingaz/Projects/TivaLaunchPad/gcc-arm-none-eabi-4_7-2013q1/bin
+#TIVA_FLASH=/home/stickyfingaz/Projects/TivaLaunchPad/lm4tools/lm4flash
 PATH=$PATH:$TIVA_GCC:$TIVA_FLASH
 # my apps
 PATH=$PATH:/home/stickyfingaz/Apps/bin:/home/stickyfingaz/.luarocks/bin
@@ -192,8 +192,8 @@ cscope_kernel()
 #  }
 
 # prepend luarocks paths, nmap NSE paths
-export LUA_PATH='/usr/share/nmap/nselib/?.lua;/usr/share/nmap/scripts/?.lua;/home/stickyfingaz/.luarocks/share/lua/5.3/?.lua;/home/stickyfingaz/.luarocks/share/lua/5.3/?/init.lua;/usr/lib64/lua/luarocks/share/lua/5.3/?.lua;/usr/lib64/lua/luarocks/share/lua/5.3/?/init.lua;/usr/share/lua/5.3/?.lua;/usr/share/lua/5.3/?/init.lua;/usr/lib64/lua/5.3/?.lua;/usr/lib64/lua/5.3/?/init.lua;./?.lua;./?/init.lua'
-export LUA_CPATH='/home/stickyfingaz/.luarocks/lib/lua/5.3/?.so;/usr/lib64/lua/luarocks/lib/lua/5.3/?.so;/usr/lib64/lua/5.3/?.so;/usr/lib64/lua/5.3/loadall.so;./?.so'
+#export LUA_PATH='/usr/share/nmap/nselib/?.lua;/usr/share/nmap/scripts/?.lua;/home/stickyfingaz/.luarocks/share/lua/5.3/?.lua;/home/stickyfingaz/.luarocks/share/lua/5.3/?/init.lua;/usr/lib64/lua/luarocks/share/lua/5.3/?.lua;/usr/lib64/lua/luarocks/share/lua/5.3/?/init.lua;/usr/share/lua/5.3/?.lua;/usr/share/lua/5.3/?/init.lua;/usr/lib64/lua/5.3/?.lua;/usr/lib64/lua/5.3/?/init.lua;./?.lua;./?/init.lua'
+#export LUA_CPATH='/home/stickyfingaz/.luarocks/lib/lua/5.3/?.so;/usr/lib64/lua/luarocks/lib/lua/5.3/?.so;/usr/lib64/lua/5.3/?.so;/usr/lib64/lua/5.3/loadall.so;./?.so'
 
 # ROS stuff
 #. /opt/ros/kinetic/setup.bash
@@ -211,3 +211,6 @@ export LUA_CPATH='/home/stickyfingaz/.luarocks/lib/lua/5.3/?.so;/usr/lib64/lua/l
 #export ROS_ETC_DIR=/opt/ros/kinetic/etc/ros
 #export PYTHONPATH=/opt/ros/kinetic/lib/python2.7/site-packages:/opt/ros/kinetic/lib64/python2.7/site-packages
 #export ROSCPP_ENABLE_DEBUG=
+
+# Intel Compiler
+. ~/intel/oneapi/setvars.sh 2>&1 > /dev/null

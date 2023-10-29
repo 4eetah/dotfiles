@@ -1,0 +1,366 @@
+let SessionLoad = 1
+if &cp | set nocp | endif
+let s:cpo_save=&cpo
+set cpo&vim
+imap <Nul> <C-Space>
+inoremap <expr> <Up> pumvisible() ? "\" : "\<Up>"
+inoremap <expr> <S-Tab> pumvisible() ? "\" : "\<S-Tab>"
+inoremap <expr> <Down> pumvisible() ? "\" : "\<Down>"
+inoremap <silent> <Plug>(fzf-maps-i) :call fzf#vim#maps('i', 0)
+inoremap <expr> <Plug>(fzf-complete-buffer-line) fzf#vim#complete#buffer_line()
+inoremap <expr> <Plug>(fzf-complete-line) fzf#vim#complete#line()
+inoremap <expr> <Plug>(fzf-complete-file-ag) fzf#vim#complete#path('ag -l -g ""')
+inoremap <expr> <Plug>(fzf-complete-file) fzf#vim#complete#path("find . -path '*/\.*' -prune -o -type f -print -o -type l -print | sed 's:^..::'")
+inoremap <expr> <Plug>(fzf-complete-path) fzf#vim#complete#path("find . -path '*/\.*' -prune -o -print | sed '1d;s:^..::'")
+inoremap <expr> <Plug>(fzf-complete-word) fzf#vim#complete#word()
+imap <C-G>S <Plug>ISurround
+imap <C-G>s <Plug>Isurround
+imap <C-S> <Plug>Isurround
+inoremap <C-U> viwUei
+xnoremap <silent>  :call multiple_cursors#new("v", 0)
+nnoremap <silent>  :call multiple_cursors#new("n", 1)
+noremap  :call rtags#JumpBack()
+noremap s :call rtags#FindRefs()
+noremap d :call rtags#JumpTo(g:SAME_WINDOW, { '--declaration-only' : '' })
+noremap g :call rtags#JumpTo(g:SAME_WINDOW)
+vnoremap <silent> # :call VisualSelection('b')
+vnoremap <silent> * :call VisualSelection('f')
+nnoremap ,d :YcmShowDetailedDiagnostic
+noremap ,g :Grepper
+noremap ,f :Files
+noremap ,e :NERDTreeTabsToggle
+nnoremap <silent> ,b :TagbarToggle
+nmap ,nd :set nonumber
+nmap ,ne :set number
+nmap ,tl :tabm -1
+nmap ,tr :tabm +1
+nmap ,ctl :s/\<\u\|\l\u/\=len(submatch(0)) == 1 ? tolower(submatch(0)) : submatch(0)[0].'_'.tolower(submatch(0)[1])/g
+nmap ,aq :qa
+nmap ,q1 :q!
+nmap ,q :q
+map ,pp :setlocal paste!
+noremap ,m :call ManReadCurrentFile()
+map ,s? z=
+map ,sa zg
+map ,sp [s
+map ,sn ]s
+map ,ss :setlocal spell!
+map ,p :cp
+map ,n :cn
+map ,co ggVGy:tabnew:set syntax=qfpgg
+map ,cc :botright cope
+map ,cd :cd %:p:h:pwd
+map ,ts :tabedit =expand("%:p:h")/
+map ,tm :tabmove
+map ,tc :tabclose
+map ,to :tabonly
+map ,tn :tabnew
+map ,ba :1,1000 bd!
+map ,bd :Bclose
+map <silent> , :noh
+nmap ,sw :w !sudo tee % >/dev/null
+nmap ,w :w!
+map 0 ^
+noremap 1<RightMouse> :q
+noremap 1<LeftMouse> :call ManRead(1)
+noremap 3<RightMouse> :q
+noremap 3<LeftMouse> :call ManRead(3)
+noremap 7<RightMouse> :q
+noremap 7<LeftMouse> :call ManRead(7)
+map Q gq
+xmap S <Plug>VSurround
+nnoremap <silent> \gwin :GWindow
+nmap \K :call dist#man#PreGetPage(0)
+nmap cV <Plug>SystemPasteLine
+xmap cv <Plug>SystemPaste
+nmap cv <Plug>SystemPaste
+nmap cP <Plug>SystemCopyLine
+xmap cp <Plug>SystemCopy
+nmap cp <Plug>SystemCopy
+nmap cS <Plug>CSurround
+nmap cs <Plug>Csurround
+nmap ds <Plug>Dsurround
+xmap gx <Plug>NetrwBrowseXVis
+nmap gx <Plug>NetrwBrowseX
+xmap gS <Plug>VgSurround
+xnoremap <silent> g<M-n> :call multiple_cursors#select_all("v", 0)
+xnoremap <silent> gî :call multiple_cursors#select_all("v", 0)
+nnoremap <silent> g<M-n> :call multiple_cursors#select_all("n", 0)
+nnoremap <silent> gî :call multiple_cursors#select_all("n", 0)
+xnoremap <silent> g<C-N> :call multiple_cursors#new("v", 0)
+xnoremap <silent> g :call multiple_cursors#new("v", 0)
+nnoremap <silent> g<C-N> :call multiple_cursors#new("n", 0)
+nnoremap <silent> g :call multiple_cursors#new("n", 0)
+map j gj
+map k gk
+noremap m<LeftMouse> :call ManRead()
+nmap ySS <Plug>YSsurround
+nmap ySs <Plug>YSsurround
+nmap yss <Plug>Yssurround
+nmap yS <Plug>YSurround
+nmap ys <Plug>Ysurround
+nnoremap <silent> <Plug>(YCMFindSymbolInDocument) :call youcompleteme#finder#FindSymbol( 'document' )
+nnoremap <silent> <Plug>(YCMFindSymbolInWorkspace) :call youcompleteme#finder#FindSymbol( 'workspace' )
+xnoremap <silent> <Plug>NetrwBrowseXVis :call netrw#BrowseXVis()
+nnoremap <silent> <Plug>NetrwBrowseX :call netrw#BrowseX(netrw#GX(),netrw#CheckIfRemote(netrw#GX()))
+xnoremap <silent> <Plug>(GrepperOperator) :call GrepperOperator(visualmode())
+nnoremap <silent> <Plug>(GrepperOperator) :set opfunc=GrepperOperatorg@
+tnoremap <silent> <Plug>(fzf-normal) 
+tnoremap <silent> <Plug>(fzf-insert) i
+nnoremap <silent> <Plug>(fzf-normal) <Nop>
+nnoremap <silent> <Plug>(fzf-insert) i
+onoremap <silent> <Plug>(fzf-maps-o) :call fzf#vim#maps('o', 0)
+xnoremap <silent> <Plug>(fzf-maps-x) :call fzf#vim#maps('x', 0)
+nnoremap <silent> <Plug>(fzf-maps-n) :call fzf#vim#maps('n', 0)
+nnoremap <silent> <Plug>SurroundRepeat .
+xnoremap <silent> <M-n> :call multiple_cursors#select_all("v", 0)
+nnoremap <silent> <M-n> :call multiple_cursors#select_all("n", 1)
+xnoremap <silent> <C-N> :call multiple_cursors#new("v", 0)
+nnoremap <silent> <C-N> :call multiple_cursors#new("n", 1)
+noremap <S-RightMouse> :tabn
+noremap <S-LeftMouse> :tabp
+noremap <C-RightMouse> :call rtags#JumpBack()
+noremap <C-R> :call rtags#JumpBack()
+noremap <C-Bslash>s :call rtags#FindRefs()
+noremap <C-@>g :call rtags#JumpTo(g:NEW_TAB)
+noremap <Nul>g :call rtags#JumpTo(g:NEW_TAB)
+noremap <C-Bslash>d :call rtags#JumpTo(g:SAME_WINDOW, { '--declaration-only' : '' })
+noremap <C-LeftMouse> :call rtags#JumpTo(g:SAME_WINDOW)
+noremap <C-Bslash>g :call rtags#JumpTo(g:SAME_WINDOW)
+nmap <F3> :source ~/.vim/vim_session
+nmap <F2> :mksession! ~/.vim/vim_session
+vmap <M-k> :m'<-2`>my`<mzgv`yo`z
+vmap <M-j> :m'>+`<my`>mzgv`yo`z
+nmap <M-k> mz:m-2`z
+nmap <M-j> mz:m+`z
+nmap <Plug>ManPreGetPage :call dist#man#PreGetPage(0)
+imap S <Plug>ISurround
+imap s <Plug>Isurround
+inoremap <expr> 	 pumvisible() ? "\" : "\	"
+imap  <Plug>Isurround
+inoremap  viwUei
+xnoremap <silent> î :call multiple_cursors#select_all("v", 0)
+nnoremap <silent> î :call multiple_cursors#select_all("n", 1)
+vmap ë :m'<-2`>my`<mzgv`yo`z
+vmap ê :m'>+`<my`>mzgv`yo`z
+nmap ë mz:m-2`z
+nmap ê mz:m+`z
+let &cpo=s:cpo_save
+unlet s:cpo_save
+set autoindent
+set autoread
+set background=dark
+set backspace=eol,start,indent
+set cmdheight=2
+set completefunc=RtagsCompleteFunc
+set completeopt=preview,menuone
+set cpoptions=aAceFsB
+set expandtab
+set fileencodings=ucs-bom,utf-8,default,latin1
+set fileformats=unix,dos,mac
+set helplang=en
+set hidden
+set history=700
+set hlsearch
+set ignorecase
+set incsearch
+set laststatus=2
+set lazyredraw
+set listchars=tab:,\ 
+set matchtime=2
+set ruler
+set runtimepath=~/.vim,~/.vim/bundle/Vundle.vim,~/.vim/bundle/vim-rtags,~/.vim/bundle/lightline.vim,~/.vim/bundle/vim-multiple-cursors,~/.vim/bundle/nerdtree,~/.vim/bundle/vim-surround,~/.vim/bundle/fzf.vim,~/.vim/bundle/fzf,~/.vim/bundle/YouCompleteMe,~/.vim/bundle/vim-system-copy,~/.vim/bundle/indentLine,~/.vim/bundle/vim-nerdtree-tabs,~/.vim/bundle/vim-grepper,/usr/share/vim/vimfiles,/usr/share/vim/vim90,/usr/share/vim/vimfiles/after,~/.vim/after,~/.vim/bundle/Vundle.vim,~/.vim/bundle/Vundle.vim/after,~/.vim/bundle/vim-rtags/after,~/.vim/bundle/lightline.vim/after,~/.vim/bundle/vim-multiple-cursors/after,~/.vim/bundle/nerdtree/after,~/.vim/bundle/vim-surround/after,~/.vim/bundle/fzf.vim/after,~/.vim/bundle/fzf/after,~/.vim/bundle/YouCompleteMe/after,~/.vim/bundle/vim-system-copy/after,~/.vim/bundle/indentLine/after,~/.vim/bundle/vim-nerdtree-tabs/after,~/.vim/bundle/vim-grepper/after
+set scrolloff=7
+set shiftwidth=4
+set shortmess=filnxtToOSc
+set showmatch
+set showtabline=2
+set smartcase
+set smartindent
+set smarttab
+set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
+set suffixes=.bak,~,.o,.h,.info,.swp,.obj,.info,.aux,.log,.dvi,.bbl,.out,.o,.lo
+set noswapfile
+set switchbuf=useopen,usetab,newtab
+set tabline=%!lightline#tabline()
+set tabpagemax=100
+set tabstop=4
+set textwidth=500
+set timeoutlen=500
+set viminfo=%,'100,<50,s10,h
+set whichwrap=b,s,<,>,h,l
+set wildignore=*.o,*~,*.pyc
+set wildmenu
+set nowritebackup
+let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-1 siso=-1
+let v:this_session=expand("<sfile>:p")
+silent only
+silent tabonly
+cd ~
+if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
+  let s:wipebuf = bufnr('%')
+endif
+if &shortmess =~ 'A'
+  set shortmess=aoOA
+else
+  set shortmess=aoO
+endif
+badd +0 atto/interview.txt
+argglobal
+%argdel
+$argadd atto/interview.txt
+edit atto/interview.txt
+argglobal
+setlocal keymap=
+setlocal noarabic
+setlocal autoindent
+setlocal backupcopy=
+setlocal balloonexpr=
+setlocal nobinary
+setlocal nobreakindent
+setlocal breakindentopt=
+setlocal bufhidden=
+setlocal buflisted
+setlocal buftype=
+setlocal nocindent
+setlocal cinkeys=0{,0},0),0],:,0#,!^F,o,O,e
+setlocal cinoptions=
+setlocal cinscopedecls=public,protected,private
+setlocal cinwords=if,else,while,do,for,switch
+setlocal colorcolumn=
+setlocal comments=fb:-,fb:*,n:>
+setlocal commentstring=
+setlocal complete=.,w,b,u,t,i
+setlocal concealcursor=inc
+setlocal conceallevel=2
+setlocal completefunc=RtagsCompleteFunc
+setlocal nocopyindent
+setlocal cryptmethod=
+setlocal nocursorbind
+setlocal nocursorcolumn
+setlocal nocursorline
+setlocal cursorlineopt=both
+setlocal define=
+setlocal dictionary=
+setlocal nodiff
+setlocal equalprg=
+setlocal errorformat=
+setlocal expandtab
+if &filetype != 'text'
+setlocal filetype=text
+endif
+setlocal fillchars=
+setlocal fixendofline
+setlocal foldcolumn=0
+setlocal foldenable
+setlocal foldexpr=0
+setlocal foldignore=#
+setlocal foldlevel=0
+setlocal foldmarker={{{,}}}
+setlocal foldmethod=manual
+setlocal foldminlines=1
+setlocal foldnestmax=20
+setlocal foldtext=foldtext()
+setlocal formatexpr=
+setlocal formatoptions=tcq
+setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
+setlocal formatprg=
+setlocal grepprg=
+setlocal iminsert=0
+setlocal imsearch=-1
+setlocal include=
+setlocal includeexpr=
+setlocal indentexpr=
+setlocal indentkeys=0{,0},0),0],:,0#,!^F,o,O,e
+setlocal noinfercase
+setlocal iskeyword=@,48-57,_,192-255
+setlocal keywordprg=
+set linebreak
+setlocal linebreak
+setlocal nolisp
+setlocal lispoptions=
+setlocal lispwords=
+set list
+setlocal list
+setlocal listchars=
+setlocal makeencoding=
+setlocal makeprg=
+setlocal matchpairs=(:),{:},[:]
+setlocal modeline
+setlocal modifiable
+setlocal nrformats=bin,octal,hex
+set number
+setlocal number
+setlocal numberwidth=4
+setlocal omnifunc=
+setlocal path=
+setlocal nopreserveindent
+setlocal nopreviewwindow
+setlocal quoteescape=\\
+setlocal noreadonly
+setlocal norelativenumber
+setlocal norightleft
+setlocal rightleftcmd=search
+setlocal noscrollbind
+setlocal scrolloff=-1
+setlocal shiftwidth=4
+setlocal noshortname
+setlocal showbreak=
+setlocal sidescrolloff=-1
+setlocal signcolumn=auto
+setlocal smartindent
+setlocal nosmoothscroll
+setlocal softtabstop=0
+setlocal nospell
+setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
+setlocal spellfile=
+setlocal spelllang=en
+setlocal spelloptions=
+setlocal statusline=%{lightline#link()}%#LightlineLeft_active_0#%(\ %{lightline#mode()}\ %)%{(&paste)?\"|\":\"\"}%(\ %{&paste?\"PASTE\":\"\"}\ %)%#LightlineLeft_active_0_1#%#LightlineLeft_active_1#%(\ %R\ %)%{(&readonly)&&(1||(&modified||!&modifiable))?\"|\":\"\"}%(\ %t\ %)%{(&modified||!&modifiable)?\"|\":\"\"}%(\ %M\ %)%#LightlineLeft_active_1_2#%#LightlineMiddle_active#%=%#LightlineRight_active_2_3#%#LightlineRight_active_2#%(\ %{&ff}\ %)%{1||1?\"|\":\"\"}%(\ %{&fenc!=#\"\"?&fenc:&enc}\ %)%{1?\"|\":\"\"}%(\ %{&ft!=#\"\"?&ft:\"no\ ft\"}\ %)%#LightlineRight_active_1_2#%#LightlineRight_active_1#%(\ %3p%%\ %)%#LightlineRight_active_0_1#%#LightlineRight_active_0#%(\ %3l:%-2c\ %)
+setlocal suffixesadd=
+setlocal noswapfile
+setlocal synmaxcol=3000
+if &syntax != 'text'
+setlocal syntax=text
+endif
+setlocal tabstop=4
+setlocal tagcase=
+setlocal tagfunc=
+setlocal tags=
+setlocal textwidth=500
+setlocal thesaurus=
+setlocal thesaurusfunc=
+setlocal noundofile
+setlocal undolevels=-123456
+setlocal varsofttabstop=
+setlocal vartabstop=
+setlocal virtualedit=
+setlocal wincolor=
+setlocal nowinfixheight
+setlocal nowinfixwidth
+setlocal wrap
+setlocal wrapmargin=0
+silent! normal! zE
+let &fdl = &fdl
+let s:l = 23 - ((15 * winheight(0) + 22) / 44)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 23
+normal! 0
+tabnext 1
+if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0
+  silent exe 'bwipe ' . s:wipebuf
+endif
+unlet! s:wipebuf
+set winheight=1 winwidth=20
+set shortmess=filnxtToOSc
+let s:sx = expand("<sfile>:p:r")."x.vim"
+if filereadable(s:sx)
+  exe "source " . fnameescape(s:sx)
+endif
+let &g:so = s:so_save | let &g:siso = s:siso_save
+nohlsearch
+doautoall SessionLoadPost
+unlet SessionLoad
+" vim: set ft=vim :

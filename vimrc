@@ -131,7 +131,7 @@ if has("gui_running")
     set guioptions+=e
     set t_Co=256
     set guitablabel=%M\ %t
-	set guifont=xos4\ Terminus\ 11
+	set guifont=Terminus\ 14
 	highlight Cursor guifg=white guibg=green
 	autocmd GUIEnter * set vb t_vb=
 endif
@@ -156,7 +156,7 @@ set noswapfile
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Use spaces instead of tabs
-" set expandtab
+set expandtab
 
 " Be smart when using tabs ;)
 set smarttab
